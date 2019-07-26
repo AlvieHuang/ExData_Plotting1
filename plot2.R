@@ -8,9 +8,13 @@ if (!exists('EPCdata')){
   EPCdata <- subset(EPCdata, (EPCdata$Date >= '2007-02-01' & EPCdata$Date <= '2007-02-02'))
 }
 
+if (!exists('EPCtime')){
+  EPCtime <- strptime(paste(EPCdata$Date,EPCdata$Time,sep=' '), '%Y-%m-%d %X')
+}
 
-# Produce 1st Plot as a .png file
-png('plot1.png',width=480,height=480)
-hist(EPCdata$Global_active_power,col='red',main='Global Active Power',xlab='Global Active Power (kilowatts)')
+
+
+# Produce 2nd Plot as a .png file
+png('plot2.png',width=480,height=480)
+plot(EPCtime,EPCdata$Global_active_power, type='l',xlab='',ylab='Global Active Power (kilowatts)')
 dev.off()
-
